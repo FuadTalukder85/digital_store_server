@@ -8,7 +8,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "dev_secret";
 
 export async function register(req: Request, res: Response) {
   try {
-    const { name, email, password } = req.body;
+    const { name, lastName, email, password } = req.body;
     const referralFrom = (req.query.r as string) || null;
 
     if (!name || !email || !password) {
@@ -33,6 +33,7 @@ export async function register(req: Request, res: Response) {
 
     const user = new User({
       name,
+      lastName,
       email,
       password: hashed,
       referralCode,
@@ -57,6 +58,7 @@ export async function register(req: Request, res: Response) {
       user: {
         id: user._id,
         name: user.name,
+        lastName: user.lastName,
         email: user.email,
         referralCode: user.referralCode,
         referredBy: user.referredBy,
