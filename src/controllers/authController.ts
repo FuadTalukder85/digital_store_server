@@ -104,3 +104,13 @@ export async function login(req: Request, res: Response) {
     return res.status(500).json({ message: "Server error" });
   }
 }
+// get all users
+export const getAllUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+};
